@@ -1,0 +1,33 @@
+﻿@page "/produtos"
+@inject IFiltrarProduto _filtrarProduto
+
+<h3>Procurar Produto</h3>
+<br/>
+
+<ProcuraProduto AoPesquisar="PesquisarHandler"/>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th class="col-sm-2 text-center">Categoria</th>
+            <th class="col-sm-2 text-center">Preço</th>
+        </tr>
+    </thead>
+    <tbody>
+       <ProdutosItens Produtos="_produtos" />
+    </tbody>
+</table>
+@code {
+    public IReadOnlyCollection<Produto> _produtos;
+
+    protected override void OnInitialized()
+    {
+        _produtos = _filtrarProduto.Handler();
+    }
+
+    private void PesquisarHandler(string termo)
+    {
+        _produtos = _filtrarProduto.Handler(termo);
+    }
+}

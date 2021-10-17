@@ -1,0 +1,14 @@
+﻿<div class="col-sm-12 col-md-10 col-lg-5 d-flex mb-3 p-0">
+    <input @oninput="Handler" style="margin-right: 5px" type="text" placeholder="Digite o que procura" class="form-control col" id=filter @bind-value="_termo" />
+</div>
+
+@code {
+    private string _termo;
+
+    [Parameter] public EventCallback<string> AoPesquisar { get; set; }
+
+    private void Handler(ChangeEventArgs e)
+    {
+        AoPesquisar.InvokeAsync(e.Value.ToString());
+    }
+}

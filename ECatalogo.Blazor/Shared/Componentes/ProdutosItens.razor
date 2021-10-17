@@ -1,0 +1,23 @@
+﻿@if (Produtos is null || Produtos.Any() is false)
+{
+    <tr><td colspan="3" class="text-center font-italic">Nenhum item na lista</td></tr>
+    return;
+}
+
+@foreach (var produto in Produtos)
+{
+    <tr>
+        <td>
+            <NavLink href="@($"produto/{produto.ProdutoId}")">
+                @produto.Nome
+            </NavLink>
+        </td>
+        <td>@produto.Categoria</td>
+        <td>@produto.Preco</td>
+    </tr>
+}
+
+
+@code {
+    [Parameter] public IReadOnlyCollection<Produto> Produtos { get; set; }
+}
